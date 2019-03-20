@@ -3,13 +3,14 @@ package com.aware.utils;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.database.sqlite.SQLiteException;
-import android.database.sqlite.SQLiteOpenHelper;
+import net.sqlcipher.database.SQLiteDatabase;
+import net.sqlcipher.database.SQLiteDatabase.CursorFactory;
+import net.sqlcipher.database.SQLiteException;
+import net.sqlcipher.database.SQLiteOpenHelper;
 import android.os.Build;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +31,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  * ContentProvider database helper<br/>
  * This class is responsible to make sure we have the most up-to-date database structures from plugins and sensors
@@ -43,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String TAG = "AwareDBHelper";
 
     private String databaseName;
+    private String databasePassword;
     private String[] databaseTables;
     private String[] tableFields;
     private int newVersion;
@@ -54,12 +58,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context, String database_name, CursorFactory cursor_factory, int database_version, String[] database_tables, String[] table_fields) {
         super(context, database_name, cursor_factory, database_version);
+        SQLiteDatabase.loadLibs(context);
         mContext = context;
         databaseName = database_name;
         databaseTables = database_tables;
         tableFields = table_fields;
         newVersion = database_version;
         cursorFactory = cursor_factory;
+
+        SharedPreferences settings = context.getSharedPreferences(context.getApplicationContext().getPackageName(), MODE_PRIVATE);
+        databasePassword = settings.getString("databasePassword", "");
     }
 
     public void setRenamedColumns(HashMap<String, String> renamed) {
@@ -170,7 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return columns;
     }
 
-    @Override
+    //@Override
     public synchronized SQLiteDatabase getWritableDatabase() {
         try {
             if (database != null) {
@@ -204,7 +212,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    @Override
+    //@Override
     public synchronized SQLiteDatabase getReadableDatabase() {
         try {
             if (database != null) {
@@ -220,7 +228,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Retuns the SQLiteDatabase
+     * Gets folder to store AWARE's database
      *
      * @return
      */
@@ -248,7 +256,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 aware_folder.mkdirs();
             }
 
-            database = SQLiteDatabase.openOrCreateDatabase(new File(aware_folder, this.databaseName).getPath(), this.cursorFactory);
+            database = SQLiteDatabase.openOrCreateDatabase(new File(aware_folder, this.databaseName).getPath(), databasePassword, this.cursorFactory);
             return database;
         } catch (SQLiteException e) {
             return null;

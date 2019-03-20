@@ -2222,6 +2222,11 @@ public class Aware extends Service {
                     }
                     if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
                         Aware.debug(context, "phone: on");
+                        // Logging database password
+                        SharedPreferences settings = context.getSharedPreferences(context.getApplicationContext().getPackageName(), MODE_PRIVATE);
+                        String databasePassword = settings.getString("databasePassword", "");
+                        Aware.debug(context, "Database password: " + databasePassword);
+
                         rowData.put(Battery_Provider.Battery_Data.STATUS, Battery.STATUS_PHONE_BOOTED);
 
                         Intent aware = new Intent(context, Aware.class);

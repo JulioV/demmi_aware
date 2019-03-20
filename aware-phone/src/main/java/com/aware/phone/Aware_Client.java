@@ -70,6 +70,14 @@ public class Aware_Client extends Aware_Activity implements SharedPreferences.On
 
     private final Aware.AndroidPackageMonitor packageMonitor = new Aware.AndroidPackageMonitor();
 
+    private void generateDatabasePassword(SharedPreferences prefs){
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        if(prefs.getString("databasePassword", "").equalsIgnoreCase("")){
+            String databasePassword = UUID.randomUUID().toString();
+            prefsEditor.putString("databasePassword", databasePassword);
+            prefsEditor.commit();
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +94,7 @@ public class Aware_Client extends Aware_Activity implements SharedPreferences.On
         }
 
         prefs = getSharedPreferences("com.aware.phone", Context.MODE_PRIVATE);
+        generateDatabasePassword(prefs);
 
         optionalSensors.put(Aware_Preferences.STATUS_ACCELEROMETER, Sensor.TYPE_ACCELEROMETER);
         optionalSensors.put(Aware_Preferences.STATUS_SIGNIFICANT_MOTION, Sensor.TYPE_ACCELEROMETER);
