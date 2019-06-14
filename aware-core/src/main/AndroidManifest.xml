@@ -24,6 +24,11 @@
         android:networkSecurityConfig="@xml/aware_ssl_config">
 
         <!-- Activities -->
+        <activity android:name="com.aware.ui.DeMMIEpisode"
+            android:label="@string/demmiEpisodeTitle"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
         <activity
             android:name="com.aware.ui.ESM_Queue"
             android:configChanges="keyboardHidden|orientation|screenSize"

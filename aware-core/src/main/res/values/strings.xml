@@ -56,4 +56,8 @@
     <string name="sensor_keyboard">Keyboard</string>
     <string name="sensor_significant">Significant motion</string>
 
+    <string name="log_episode">Log\nEpisode</string>
+    <string name="log_episode_clicked">Logged</string>
+    <string name="hint_text_episode">Anything you want to add about this episode? (Optional)</string>
+    <string name="demmiEpisodeTitle">Log an episode</string>
 </resources>

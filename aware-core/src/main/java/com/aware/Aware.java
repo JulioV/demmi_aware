@@ -63,6 +63,7 @@ import com.aware.providers.Aware_Provider.Aware_Plugins;
 import com.aware.providers.Aware_Provider.Aware_Settings;
 import com.aware.providers.Battery_Provider;
 import com.aware.providers.Scheduler_Provider;
+import com.aware.ui.DeMMIEpisode;
 import com.aware.utils.Aware_Accounts;
 import com.aware.utils.Aware_Plugin;
 import com.aware.utils.DownloadPluginService;
@@ -178,6 +179,11 @@ public class Aware extends Service {
      * Broadcasted when joined study successfully
      */
     public static final String ACTION_JOINED_STUDY = "ACTION_JOINED_STUDY";
+
+    /**
+     * Used by the DeMMi episode reporting
+     */
+    private static final String ACTION_DEMMI_EPISODE = "ACTION_DEMMI_EPISODE";
 
     /**
      * Used by the AWARE watchdog
@@ -359,6 +365,7 @@ public class Aware extends Service {
     public void foreground(boolean enable) {
         if (enable) {
             Intent aware = new Intent(this, Aware.class);
+            aware.setAction(ACTION_DEMMI_EPISODE);
             PendingIntent onTap = PendingIntent.getService(this, 0, aware, 0);
 
             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, Aware.AWARE_NOTIFICATION_ID);
@@ -736,6 +743,12 @@ public class Aware extends Service {
                     startPlugins(getApplicationContext());
                 }
 
+                if (intent.getAction().equalsIgnoreCase(ACTION_DEMMI_EPISODE)) {
+                    Intent demmiEpisode = new Intent(getApplicationContext(), DeMMIEpisode.class);
+                    demmiEpisode.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                            | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(demmiEpisode);
+                }
             } else {
                 startAWARE(getApplicationContext());
                 startPlugins(getApplicationContext());
