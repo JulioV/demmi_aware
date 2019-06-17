@@ -29,6 +29,13 @@
             android:launchMode="singleInstance"
             android:taskAffinity=""
             android:excludeFromRecents="true"/>
+
+        <activity android:name="com.aware.ui.DeMMIMood"
+            android:theme="@style/Theme.AppCompat.Translucent"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"/>
+
         <activity
             android:name="com.aware.ui.ESM_Queue"
             android:configChanges="keyboardHidden|orientation|screenSize"

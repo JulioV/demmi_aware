@@ -64,6 +64,7 @@ import com.aware.providers.Aware_Provider.Aware_Settings;
 import com.aware.providers.Battery_Provider;
 import com.aware.providers.Scheduler_Provider;
 import com.aware.ui.DeMMIEpisode;
+import com.aware.ui.DeMMIMood;
 import com.aware.utils.Aware_Accounts;
 import com.aware.utils.Aware_Plugin;
 import com.aware.utils.DownloadPluginService;
@@ -704,6 +705,17 @@ public class Aware extends Service {
 
                         Scheduler.saveSchedule(this, watchdog);
                     }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    Scheduler.Schedule schedule = new Scheduler.Schedule("demmimood");
+                    schedule.addHour(9)
+                            .addHour(21)
+                            .setActionType(Scheduler.ACTION_TYPE_ACTIVITY)
+                            .setActionClass(getPackageName() + "/" +DeMMIMood.class.getCanonicalName());
+                    Scheduler.saveSchedule(getApplicationContext(), schedule);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

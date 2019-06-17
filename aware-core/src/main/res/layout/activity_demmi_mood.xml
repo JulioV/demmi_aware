@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#99252525"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:ems="14"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="What is your mood like at the moment?"
+            android:textAlignment="center"
+            android:textColor="@color/blueAccent"
+            android:textSize="18sp" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/buttonMoodA"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@android:color/white"
+                android:onClick="moodClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_sentiment_very_satisfied_24dp"
+                android:tag="0" />
+
+            <ImageButton
+                android:id="@+id/buttonMoodB"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@android:color/white"
+                android:onClick="moodClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_sentiment_satisfied_24dp"
+                android:tag="1" />
+
+            <ImageButton
+                android:id="@+id/buttonMoodC"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@android:color/white"
+                android:onClick="moodClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_sentiment_neutral_24dp"
+                android:tag="2" />
+
+            <ImageButton
+                android:id="@+id/buttonMoodD"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@android:color/white"
+                android:onClick="moodClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_sentiment_dissatisfied_24dp"
+                android:tag="3" />
+
+            <ImageButton
+                android:id="@+id/buttonMoodE"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@android:color/white"
+                android:onClick="moodClick"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_sentiment_very_dissatisfied_24dp"
+                android:tag="4" />
+
+        </TableRow>
+
+        <Button
+            android:id="@+id/button3"
+            style="@android:style/Widget.DeviceDefault.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@android:color/white"
+            android:fontFamily="sans-serif-light"
+            android:onClick="dismissMoodLog"
+            android:text="Not Now"
+            android:textColor="@color/blueAccent" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
